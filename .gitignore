@@ -28,3 +28,6 @@ tmp/
 
 public/notion/*
 !public/notion/.gitkeep
+
+# Next.js build output
+package-lock.json

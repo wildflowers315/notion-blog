@@ -1,0 +1,261 @@
+---
+import { getNavLink } from '../lib/blog-helpers.ts'
+---
+
+<header class="header-menu">
+  <div class="header-menu-content">
+    <a href={getNavLink('/')} class="site-title">My blog</a>
+    <button class="menu-toggle" aria-label="open menu">
+      <span class="hamburger"></span>
+    </button>
+    <nav class="menu-items">
+      <div class="social-links">
+        <a href="https://wildflowers315.github.io/" class="social-link" aria-label="Home" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-home"></i>
+        </a>
+        <!-- <a href="" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="social-link" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-youtube"></i>
+        </a> -->
+        <a href="https://github.com/wildflowers315" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menuItems = document.querySelector('.menu-items');
+  
+  menuToggle?.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    menuItems?.classList.toggle('active');
+  });
+</script>
+
+<style>
+  :root {
+    --header-height: 60px;
+    --accents-1: #4caf50;
+    --accents-2: #81c784;
+  }
+
+  .header-menu {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: rgba(240, 255, 240, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 3px solid rgba(76, 175, 80, 0.2);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+  }
+
+  .header-menu-content {
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accents-1);
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
+    text-shadow: 
+      1px 1px 0 #fff,
+      -1px -1px 0 #fff,
+      -1px 1px 0 #fff,
+      1px -1px 0 #fff;
+  }
+
+  .site-title:hover {
+    color: var(--accents-2);
+  }
+
+  .menu-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .menu-items {
+      display: none;
+    }
+    .menu-items.active {
+      display: flex;
+    }
+  }
+
+  .menu-left {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    color: var(--accents-1);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: var(--accents-2);
+  }
+
+  .menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--accents-1);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .menu-link:hover {
+    color: var(--accents-2);
+  }
+
+  .menu-link span {
+    font-size: 1.1em;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--accents-1);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--accents-1);
+    transition: all 0.3s ease;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  .menu-toggle.active .hamburger {
+    background: transparent;
+  }
+
+  .menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    .menu-items.active {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: auto;
+      background: rgba(240, 255, 240, 0.98);
+      flex-direction: column;
+      gap: 0;
+      padding: 15px;
+      border-bottom: 3px solid rgba(76, 175, 80, 0.2);
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .menu-left {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(76, 175, 80, 0.2);
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .menu-link {
+      font-size: 1rem;
+      padding: 8px 15px;
+      border-radius: 20px;
+      background: rgba(76, 175, 80, 0.1);
+    }
+
+    .social-link {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .header-menu-content {
+      padding: 0 10px;
+    }
+
+    .site-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>

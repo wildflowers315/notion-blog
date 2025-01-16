@@ -1,11 +1,13 @@
 .main header {
   padding: 0 0 20px;
 }
+
 .main footer {
-  border-top: 1px dashed #888;
+  border-top: 1px dashed #A3FFD1;
   margin: 0 auto;
   padding: 40px 0 0;
 }
+
 @media (max-width: 640px) {
   .main footer {
     margin: 0 auto 40px;
@@ -14,9 +16,96 @@
 
 .post {
   margin: 0 auto 40px;
+  padding: 25px;
+  background-color: rgba(243, 255, 251, 0.95);
+  border-radius: 20px;
+  box-shadow:
+    0 4px 15px rgba(163, 255, 209, 0.2),
+    0 0 0 2px rgba(163, 255, 209, 0.05);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  user-select: text;
+  pointer-events: auto;
 }
+
+.post * {
+  pointer-events: auto;
+}
+
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(163, 255, 209, 0.3),
+    0 0 0 2px rgba(163, 255, 209, 0.15);
+}
+
+.post h2 {
+  color: #8cf4d5;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.post h2 a {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.post h2 a:hover {
+  color: #8cf4d5;
+}
+
 .post footer {
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   padding: 0;
   border: 0;
+}
+
+/* カテゴリータグのスタイル */
+:global(.category-tag) {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  color: #42ff8c;
+  background: rgba(66, 255, 140, 0.08);
+  border: 3px solid rgba(66, 255, 140, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease, letter-spacing 0.3s ease;
+  margin: 0 6px 6px 0;
+  position: relative;
+  overflow: hidden;
+  user-select: text;
+}
+
+:global(.category-tag::before) {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(66, 255, 140, 0.15), transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:global(.category-tag > *) {
+  position: relative;
+  z-index: 1;
+}
+
+:global(.category-tag:hover) {
+  background: rgba(66, 255, 140, 0.12);
+  box-shadow:
+    0 4px 12px rgba(66, 255, 140, 0.2),
+    0 0 0 2px rgba(66, 255, 140, 0.1);
+  letter-spacing: 0.02em;
+}
+
+:global(.category-tag:hover::before) {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
